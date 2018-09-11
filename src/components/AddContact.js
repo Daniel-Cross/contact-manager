@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Consumer } from '../context';
 import TextInputGroup from './textInputGroup';
 import axios from 'axios';
+import '../styles/AddContact.css';
 
 class AddContact extends Component {
   state = {
@@ -68,42 +69,44 @@ class AddContact extends Component {
         {value => {
           const { dispatch } = value;
           return (
-            <div className="card mb-3">
-              <div className="card-header">Add Contact</div>
-              <div className="card-body">
-                <form onSubmit={this.handleSubmit.bind(this, dispatch)}>
-                  <TextInputGroup
-                    label="Name"
-                    name="name"
-                    placeholder="Name"
-                    value={name}
-                    onChange={this.handleChange}
-                    error={errors.name}
-                  />
-                  <TextInputGroup
-                    label="Phone"
-                    name="phone"
-                    placeholder="Phone"
-                    value={phone}
-                    onChange={this.handleChange}
-                    error={errors.phone}
-                  />
-                  <TextInputGroup
-                    label="Email"
-                    name="email"
-                    type="email"
-                    placeholder="Email"
-                    value={email}
-                    onChange={this.handleChange}
-                    error={errors.email}
-                  />
+            <div className="AddContact">
+              <div className="card mb-3">
+                <h1 className="card-header">Add Contact</h1>
+                <div className="card-body">
+                  <form onSubmit={this.handleSubmit.bind(this, dispatch)}>
+                    <TextInputGroup
+                      label="Name"
+                      name="name"
+                      placeholder="Name"
+                      value={name}
+                      onChange={this.handleChange}
+                      error={errors.name}
+                    />
+                    <TextInputGroup
+                      label="Phone"
+                      name="phone"
+                      placeholder="Phone"
+                      value={phone}
+                      onChange={this.handleChange}
+                      error={errors.phone}
+                    />
+                    <TextInputGroup
+                      label="Email"
+                      name="email"
+                      type="email"
+                      placeholder="Email"
+                      value={email}
+                      onChange={this.handleChange}
+                      error={errors.email}
+                    />
 
-                  <input
-                    type="submit"
-                    value="Add Contact"
-                    className="btn  btn-dark btn-block"
-                  />
-                </form>
+                    <input
+                      type="submit"
+                      value="Add Contact"
+                      className="btn  btn-dark btn-block"
+                    />
+                  </form>
+                </div>
               </div>
             </div>
           );
