@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import '../styles/Contact.css';
 import { Consumer } from '../context';
+import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 class Contact extends Component {
   state = {
@@ -13,9 +15,13 @@ class Contact extends Component {
     });
   };
 
-  handleClickDelete = (id, dispatch) => {
-    console.log(id);
-    dispatch({ type: 'DELETE_CONTACT', payload: id });
+  handleClickDelete = async (id, dispatch) => {
+    try {
+      await axios.delete(`https://jsonplaceholder.typicode.com/users/${id}`);
+      dispatch({ type: 'DELETE_CONTACT', payload: id });
+    } catch (e) {
+      dispatch({ type: 'DELETE_CONTACT', payload: id });
+    }
   };
 
   render() {
@@ -27,7 +33,7 @@ class Contact extends Component {
         {value => {
           const { dispatch } = value;
           return (
-            <div className="Contact">
+            <React.Fragment>
               <div className="card card-body mb-3">
                 <h4>
                   {name}{' '}
@@ -37,6 +43,17 @@ class Contact extends Component {
                     style={{ float: 'right', color: 'red' }}
                     onClick={this.handleClickDelete.bind(this, id, dispatch)}
                   />
+                  <Link to={`edit/${id}`}>
+                    <i
+                      className="fas fa-pencil-alt"
+                      style={{
+                        cursor: 'pointer',
+                        float: 'right',
+                        color: 'black',
+                        marginRight: '1rem'
+                      }}
+                    />
+                  </Link>
                 </h4>
                 {showContactInfo ? (
                   <ul className="list-group">
@@ -45,7 +62,7 @@ class Contact extends Component {
                   </ul>
                 ) : null}
               </div>
-            </div>
+            </React.Fragment>
           );
         }}
       </Consumer>
