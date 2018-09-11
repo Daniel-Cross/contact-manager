@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 const Navbar = props => {
-  const { title } = props;
   return (
     <div className="Navbar">
       <nav className="navbar navbar-expand-sm navbar-dark bg-dark mb-3 py-0">
